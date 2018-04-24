@@ -1,12 +1,13 @@
 using System.Linq;
 using System.Collections.Generic;
+using rOOnscape.Types;
 
 namespace rOOnscape {
-  
+
   public class Player {
 
-    private Dictionary<string, Skill> skills = new Dictionary<string, Skill>();
-    private Dictionary<string, Minigame> minigames = new Dictionary<string, Minigame>();
+    private Dictionary<Skills, Skill> skills = new Dictionary<Skills, Skill>();
+    private Dictionary<Minigames, Minigame> minigames = new Dictionary<Minigames, Minigame>();
 
     public Player(IEnumerable<string[]> skillData, IEnumerable<string[]> miniGameData) {
       // var overallOffset = 1; //first row is overall meta data
@@ -15,45 +16,45 @@ namespace rOOnscape {
 
       // var justSkillLevels = playerDataString.Take(totalskills - scrollsOffset).Skip(overallOffset);
 
-      skills.Add("attack", new Skill(skillData.ElementAt(0)));
-      skills.Add("defense", new Skill(skillData.ElementAt(1)));
-      skills.Add("strength", new Skill(skillData.ElementAt(2)));
-      skills.Add("hitpoints", new Skill(skillData.ElementAt(3)));
-      skills.Add("ranged", new Skill(skillData.ElementAt(4)));
-      skills.Add("prayer", new Skill(skillData.ElementAt(5)));
-      skills.Add("magic", new Skill(skillData.ElementAt(6)));
-      skills.Add("cooking", new Skill(skillData.ElementAt(7)));
-      skills.Add("woodcutting", new Skill(skillData.ElementAt(8)));
-      skills.Add("fletching", new Skill(skillData.ElementAt(9)));
-      skills.Add("fishing", new Skill(skillData.ElementAt(10)));
-      skills.Add("firemaking", new Skill(skillData.ElementAt(11)));
-      skills.Add("crafting", new Skill(skillData.ElementAt(12)));
-      skills.Add("smithing", new Skill(skillData.ElementAt(13)));
-      skills.Add("mining", new Skill(skillData.ElementAt(14)));
-      skills.Add("herblore", new Skill(skillData.ElementAt(15)));
-      skills.Add("agility", new Skill(skillData.ElementAt(16)));
-      skills.Add("theiving", new Skill(skillData.ElementAt(17)));
-      skills.Add("slayer", new Skill(skillData.ElementAt(18)));
-      skills.Add("farming", new Skill(skillData.ElementAt(19)));
-      skills.Add("runecraft", new Skill(skillData.ElementAt(20)));
-      skills.Add("hunter", new Skill(skillData.ElementAt(21)));
-      skills.Add("construction", new Skill(skillData.ElementAt(22)));
+      skills.Add(Skills.Attack, new Skill(skillData.ElementAt((int)Skills.Attack)));
+      skills.Add(Skills.Defense, new Skill(skillData.ElementAt((int)Skills.Defense)));
+      skills.Add(Skills.Strength, new Skill(skillData.ElementAt((int)Skills.Strength)));
+      skills.Add(Skills.Hitpoints, new Skill(skillData.ElementAt((int)Skills.Hitpoints)));
+      skills.Add(Skills.Ranged, new Skill(skillData.ElementAt((int)Skills.Ranged)));
+      skills.Add(Skills.Prayer, new Skill(skillData.ElementAt((int)Skills.Prayer)));
+      skills.Add(Skills.Magic, new Skill(skillData.ElementAt((int)Skills.Magic)));
+      skills.Add(Skills.Cooking, new Skill(skillData.ElementAt((int)Skills.Cooking)));
+      skills.Add(Skills.Woodcutting, new Skill(skillData.ElementAt((int)Skills.Woodcutting)));
+      skills.Add(Skills.Fletching, new Skill(skillData.ElementAt((int)Skills.Fletching)));
+      skills.Add(Skills.Fishing, new Skill(skillData.ElementAt((int)Skills.Fishing)));
+      skills.Add(Skills.Firemaking, new Skill(skillData.ElementAt((int)Skills.Firemaking)));
+      skills.Add(Skills.Crafting, new Skill(skillData.ElementAt((int)Skills.Crafting)));
+      skills.Add(Skills.Smithing, new Skill(skillData.ElementAt((int)Skills.Smithing)));
+      skills.Add(Skills.Mining, new Skill(skillData.ElementAt((int)Skills.Mining)));
+      skills.Add(Skills.Herblore, new Skill(skillData.ElementAt((int)Skills.Herblore)));
+      skills.Add(Skills.Agility, new Skill(skillData.ElementAt((int)Skills.Agility)));
+      skills.Add(Skills.Theiving, new Skill(skillData.ElementAt((int)Skills.Theiving)));
+      skills.Add(Skills.Slayer, new Skill(skillData.ElementAt((int)Skills.Slayer)));
+      skills.Add(Skills.Farming, new Skill(skillData.ElementAt((int)Skills.Farming)));
+      skills.Add(Skills.Runecrafting, new Skill(skillData.ElementAt((int)Skills.Runecrafting)));
+      skills.Add(Skills.Hunter, new Skill(skillData.ElementAt((int)Skills.Hunter)));
+      skills.Add(Skills.Contstruction, new Skill(skillData.ElementAt((int)Skills.Contstruction)));
 
-      minigames.Add("cluescrollseasy", new Minigame(miniGameData.ElementAt(0)));
-      minigames.Add("cluescrollsmedium", new Minigame(miniGameData.ElementAt(1)));
-      minigames.Add("cluescrollsall", new Minigame(miniGameData.ElementAt(2)));
-      minigames.Add("bountyhunterrogue", new Minigame(miniGameData.ElementAt(3)));
-      minigames.Add("bountyhunter", new Minigame(miniGameData.ElementAt(4)));
-      minigames.Add("cluescrollshard", new Minigame(miniGameData.ElementAt(5)));
-      minigames.Add("lastmanstandingrank", new Minigame(miniGameData.ElementAt(6)));
-      minigames.Add("cluescrollselite", new Minigame(miniGameData.ElementAt(7)));
-      minigames.Add("cluescrollsmaster", new Minigame(miniGameData.ElementAt(8)));
-      
+      minigames.Add(Minigames.ClueScrollEasy, new Minigame(miniGameData.ElementAt((int)Minigames.ClueScrollEasy)));
+      minigames.Add(Minigames.ClueScrollMedium, new Minigame(miniGameData.ElementAt((int)Minigames.ClueScrollMedium)));
+      minigames.Add(Minigames.ClueScrollAll, new Minigame(miniGameData.ElementAt((int)Minigames.ClueScrollAll)));
+      minigames.Add(Minigames.BountyHunterRogue, new Minigame(miniGameData.ElementAt((int)Minigames.BountyHunterRogue)));
+      minigames.Add(Minigames.BountyHunter, new Minigame(miniGameData.ElementAt((int)Minigames.BountyHunter)));
+      minigames.Add(Minigames.ClueScrollHard, new Minigame(miniGameData.ElementAt((int)Minigames.ClueScrollHard)));
+      minigames.Add(Minigames.LastManStanding, new Minigame(miniGameData.ElementAt((int)Minigames.LastManStanding)));
+      minigames.Add(Minigames.ClueScrollElite, new Minigame(miniGameData.ElementAt((int)Minigames.ClueScrollElite)));
+      minigames.Add(Minigames.ClueScrollMaster, new Minigame(miniGameData.ElementAt((int)Minigames.ClueScrollMaster)));
+
     }
 
-    public int GetGlobalRankOfSkill(string skillName) { return skills[skillName].GetRank; }
-    public int GetLevelOfSkill(string skillName) { return skills[skillName].GetLevel; }
-    public int GetExperienceOfSkill(string skillName) { return skills[skillName].GetExperience; }
+    public int GetGlobalRankOfSkill(Skills skillIndex) { return skills[skillIndex].GetRank; }
+    public int GetLevelOfSkill(Skills skillIndex) { return skills[skillIndex].GetLevel; }
+    public int GetExperienceOfSkill(Skills skillIndex) { return skills[skillIndex].GetExperience; }
 
   }
 }
