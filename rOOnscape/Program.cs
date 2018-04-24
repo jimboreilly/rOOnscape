@@ -19,7 +19,7 @@ namespace rOOnscape {
 
       var transcribedResponse = responseFromServer.Split('\n').Select(row => row.Split(','));
       var overallOffset = 1;
-      var totalskills = 23; 
+      var totalskills = 23;
       var minigameOffset = 9;
 
       var justSkills = transcribedResponse.Take(totalskills - minigameOffset).Skip(overallOffset);

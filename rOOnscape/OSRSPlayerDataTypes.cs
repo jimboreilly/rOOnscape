@@ -1,5 +1,5 @@
 namespace rOOnscape.Types {
-  public enum Skills {
+  public enum SkillName {
     Attack,
     Defense,
     Strength,
@@ -25,7 +25,7 @@ namespace rOOnscape.Types {
     Contstruction
   }
 
-  public enum Minigames {
+  public enum MinigameName {
     ClueScrollEasy,
     ClueScrollMedium,
     ClueScrollAll,
