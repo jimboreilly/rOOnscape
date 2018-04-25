@@ -15,6 +15,9 @@ namespace rOOnscape {
     public int GetRank => this.rank;
     public int GetLevel => this.level;
     public int GetExperience => this.exp;
+
+    public bool IsMax => this.level == 99;
+
   }
 
 }
