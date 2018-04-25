@@ -5,9 +5,9 @@ namespace rOOnscape {
     private readonly int rank;
     private readonly int score;
 
-    public Minigame(string[] values) {
-      this.rank = Int32.Parse(values[0]);
-      this.score = Int32.Parse(values[1]);
+    public Minigame(int Rank, int Score) {
+      this.rank = Rank;
+      this.score = Score;
     }
 
     public int GetRank => this.rank;

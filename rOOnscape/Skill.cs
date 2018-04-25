@@ -6,10 +6,10 @@ namespace rOOnscape {
     private readonly int level;
     private readonly int exp;
 
-    public Skill(string[] values) {
-      this.rank = Int32.Parse(values[0]);
-      this.level = Int32.Parse(values[1]);
-      this.exp = Int32.Parse(values[2]);
+    public Skill(int Rank, int Level, int Experience) {
+      this.rank = Rank;
+      this.level = Level;
+      this.exp = Experience;
     }
 
     public int GetRank => this.rank;

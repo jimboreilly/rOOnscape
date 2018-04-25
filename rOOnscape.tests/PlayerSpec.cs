@@ -32,7 +32,7 @@ namespace rOOnscape.specs {
 
     [Test]
     public void ConstructAStrengthPure() {
-      var maxSkill = new[] { "1", "99", "200,000,000" };
+      var maxSkill = new[] { "1", "99", "200000000" };
       var strengthOnly = defaultSkills.ToList();
       strengthOnly.Insert((int)SkillName.Strength, maxSkill);
       strengthOnly.RemoveAt((int)SkillName.Strength + 1);
@@ -41,7 +41,8 @@ namespace rOOnscape.specs {
 
       Assert.IsTrue(strengthPure.IsMaxSkill(SkillName.Strength));
       Assert.IsFalse(strengthPure.IsMaxSkill(SkillName.Defense));
-
+			Assert.AreEqual(99,strengthPure.GetLevelOfSkill(SkillName.Strength));
     }
+
   }
 }
