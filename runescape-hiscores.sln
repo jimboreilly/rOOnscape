@@ -2,11 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rOOnscape.tests", "rOOnscape.tests\rOOnscape.tests.csproj", "{46DACB26-17E2-44D6-8735-E502F0B54083}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rOOnscape.Tests", "rOOnscape.tests\rOOnscape.Tests.csproj", "{46DACB26-17E2-44D6-8735-E502F0B54083}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rOOnscape", "rOOnscape\rOOnscape.csproj", "{D6AB954B-675D-44B2-84C9-E412E62B5CD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rOOnscape.core", "rOOnscape.core\rOOnscape.core.csproj", "{BC2AE8EA-19BF-4C59-9323-8F8AA6EFF978}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rOOnscape.Core", "rOOnscape.core\rOOnscape.Core.csproj", "{BC2AE8EA-19BF-4C59-9323-8F8AA6EFF978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

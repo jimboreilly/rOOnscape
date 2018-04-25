@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\rOOnscape.core\rOOnscape.core.csproj" />
+    <ProjectReference Include="..\rOOnscape.core\rOOnscape.Core.csproj" />
   </ItemGroup>
 
 </Project>
