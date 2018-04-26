@@ -1,6 +1,6 @@
 using System;
 
-namespace rOOnscape {
+namespace rOOnscape.Structures {
   public class Skill {
     private readonly int rank;
     private readonly int level;

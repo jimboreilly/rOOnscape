@@ -1,15 +1,12 @@
 using System.Linq;
 using System.Collections.Generic;
-using rOOnscape.Types;
+using rOOnscape.Structures.Types;
 using rOOnscape.Core.Extensions;
 using System;
 
-namespace rOOnscape {
+namespace rOOnscape.Structures {
 
   public class Player {
-
-    public static readonly int TotalSkills = Enum.GetNames(typeof(SkillName)).Length;
-    public static readonly int TotalMinigames = Enum.GetNames(typeof(MinigameName)).Length;
 
     private Dictionary<SkillName, Skill> skills = new Dictionary<SkillName, Skill>();
     private Dictionary<MinigameName, Minigame> minigames = new Dictionary<MinigameName, Minigame>();
@@ -50,9 +47,13 @@ namespace rOOnscape {
       return constructor(data.ToIntArray());
     }
 
+    public static readonly int TotalSkills = Enum.GetNames(typeof(SkillName)).Length;
+    public static readonly int TotalMinigames = Enum.GetNames(typeof(MinigameName)).Length;
+
     public int GetGlobalRankOfSkill(SkillName s) => skills[s].GetRank;
     public int GetLevelOfSkill(SkillName s) => skills[s].GetLevel;
     public int GetExperienceOfSkill(SkillName s) => skills[s].GetExperience;
+    public int GetTotalLevel() => skills.Sum(x => x.Value.GetLevel);
 
     public bool IsMaxSkill(SkillName s) => skills[s].IsMax;
     public Dictionary<SkillName, Skill> GetSkills => skills;

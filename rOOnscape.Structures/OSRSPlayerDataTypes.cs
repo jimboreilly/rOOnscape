@@ -1,4 +1,4 @@
-namespace rOOnscape.Types {
+namespace rOOnscape.Structures.Types {
   public enum SkillName {
     Attack,
     Defense,

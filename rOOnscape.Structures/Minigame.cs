@@ -1,6 +1,6 @@
 using System;
 
-namespace rOOnscape {
+namespace rOOnscape.Structures {
   public class Minigame {
     private readonly int rank;
     private readonly int score;

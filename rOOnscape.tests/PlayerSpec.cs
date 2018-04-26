@@ -2,23 +2,22 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using rOOnscape;
-using rOOnscape.Types;
+using rOOnscape.Structures;
+using rOOnscape.Structures.Types;
+using rOOnscape.Core.Extensions;
 
-namespace rOOnscape.specs {
+namespace rOOnscape.Specs {
   public class Tests {
     private IEnumerable<string[]> defaultSkills;
     private IEnumerable<string[]> defaultMinigames;
 
     [SetUp]
     public void Setup() {
-      var totalSkills = Player.TotalSkills;
       var defaultSkillRankLevelExp = new[] { "-1", "1", "1" };
-      defaultSkills = Enumerable.Range(0, totalSkills).Select(x => defaultSkillRankLevelExp);
+      defaultSkills = 0.To(Player.TotalSkills).Select(x => defaultSkillRankLevelExp);
 
-      var totalMinigames = Player.TotalMinigames;
       var defaultMinigameRankScore = new[] { "-1", "1" };
-      defaultMinigames = Enumerable.Range(0, totalMinigames).Select(x => defaultMinigameRankScore);
+      defaultMinigames = 0.To(Player.TotalMinigames).Select(x => defaultMinigameRankScore);
     }
 
     [Test]
@@ -33,15 +32,34 @@ namespace rOOnscape.specs {
     [Test]
     public void ConstructAStrengthPure() {
       var maxSkill = new[] { "1", "99", "200000000" };
-      var strengthOnly = defaultSkills.ToList();
-      strengthOnly.Insert((int)SkillName.Strength, maxSkill);
-      strengthOnly.RemoveAt((int)SkillName.Strength + 1);
 
-      var strengthPure = new Player(strengthOnly, defaultMinigames);
+      var strengthPure = constructPlayerWithReplacedSkill(SkillName.Strength, maxSkill);
 
       Assert.IsTrue(strengthPure.IsMaxSkill(SkillName.Strength));
       Assert.IsFalse(strengthPure.IsMaxSkill(SkillName.Defense));
-			Assert.AreEqual(99,strengthPure.GetLevelOfSkill(SkillName.Strength));
+      Assert.AreEqual(99, strengthPure.GetLevelOfSkill(SkillName.Strength));
+    }
+
+    [Test]
+    public void TotalLevelOfNewPlayerIsEqualToTotalSkills() {
+      var noob = new Player(defaultSkills, defaultMinigames);
+      Assert.AreEqual(Player.TotalSkills, noob.GetTotalLevel());
+    }
+
+    [Test]
+    public void APlayerAfterTheFirstStepOfTutorialIslandHasPlus1TotalLevel() {
+      var level2Skill = new[] { "1", "2", "83" };
+      var cookedSomeShrimpOnTutorialIsland = constructPlayerWithReplacedSkill(SkillName.Cooking, level2Skill);
+
+      Assert.AreEqual(Player.TotalSkills + 1, cookedSomeShrimpOnTutorialIsland.GetTotalLevel());
+    }
+
+    private Player constructPlayerWithReplacedSkill(SkillName replacedSkill, string[] newInfo) {
+      var allskills = defaultSkills.ToList();
+      allskills.Insert((int)replacedSkill, newInfo);
+      allskills.RemoveAt((int)replacedSkill + 1);
+
+      return new Player(allskills, defaultMinigames);
     }
 
   }
