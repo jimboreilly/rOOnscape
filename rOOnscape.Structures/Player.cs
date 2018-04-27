@@ -56,6 +56,7 @@ namespace rOOnscape.Structures {
     public int GetTotalLevel() => skills.Sum(x => x.Value.GetLevel);
 
     public bool IsMaxSkill(SkillName s) => skills[s].IsMax;
+    public List<string> GetMaxSkills() => skills.Where(skill => skill.Value.IsMax).Select(x => Enum.GetName(typeof(SkillName), (int)x.Key)).ToList();
     public Dictionary<SkillName, Skill> GetSkills => skills;
 
   }

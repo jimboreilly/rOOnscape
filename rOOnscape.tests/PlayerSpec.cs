@@ -7,6 +7,7 @@ using rOOnscape.Structures.Types;
 using rOOnscape.Core.Extensions;
 
 namespace rOOnscape.Specs {
+
   public class Tests {
     private IEnumerable<string[]> defaultSkills;
     private IEnumerable<string[]> defaultMinigames;
@@ -32,8 +33,8 @@ namespace rOOnscape.Specs {
     [Test]
     public void ConstructAStrengthPure() {
       var maxSkill = new[] { "1", "99", "200000000" };
-
-      var strengthPure = constructPlayerWithReplacedSkill(SkillName.Strength, maxSkill);
+      var strengthOnlyMax = buildListOfSkillsToReplace(new List<SkillName>() { SkillName.Strength }, maxSkill);
+      var strengthPure = constructPlayerWithReplacedSkills(strengthOnlyMax);
 
       Assert.IsTrue(strengthPure.IsMaxSkill(SkillName.Strength));
       Assert.IsFalse(strengthPure.IsMaxSkill(SkillName.Defense));
@@ -49,17 +50,47 @@ namespace rOOnscape.Specs {
     [Test]
     public void APlayerAfterTheFirstStepOfTutorialIslandHasPlus1TotalLevel() {
       var level2Skill = new[] { "1", "2", "83" };
-      var cookedSomeShrimpOnTutorialIsland = constructPlayerWithReplacedSkill(SkillName.Cooking, level2Skill);
+      var newSkills = new List<(SkillName skill, string[] newData)> { (SkillName.Cooking, level2Skill) };
+      var cookedSomeShrimpOnTutorialIsland = constructPlayerWithReplacedSkills(newSkills);
 
       Assert.AreEqual(Player.TotalSkills + 1, cookedSomeShrimpOnTutorialIsland.GetTotalLevel());
     }
 
-    private Player constructPlayerWithReplacedSkill(SkillName replacedSkill, string[] newInfo) {
-      var allskills = defaultSkills.ToList();
-      allskills.Insert((int)replacedSkill, newInfo);
-      allskills.RemoveAt((int)replacedSkill + 1);
+    [Test]
+    public void FindAllMaxSkillsOfPlayer() {
+      var maxSkill = new[] { "1", "99", "1" };
+      var fighterOnly = buildListOfSkillsToReplace(new List<SkillName>() { SkillName.Attack, SkillName.Hitpoints, SkillName.Defense }, maxSkill);
+      var fighter = constructPlayerWithReplacedSkills(fighterOnly);
 
-      return new Player(allskills, defaultMinigames);
+      var numberOfMaxSkills = 3;
+      var expectedSkills = new List<string>() { "Attack", "Hitpoints", "Defense" };
+      Assert.AreEqual(numberOfMaxSkills, fighter.GetMaxSkills().Count);
+      CollectionAssert.AreEquivalent(expectedSkills, fighter.GetMaxSkills());
+    }
+
+    [Test]
+    public void FindsASingleMaxOnAOneTrickPony() {
+      var maxSkill = new[] { "1", "99", "1" };
+      var onlyRunecrafts = buildListOfSkillsToReplace(new List<SkillName>() { SkillName.Runecrafting }, maxSkill);
+      var runecrafter = constructPlayerWithReplacedSkills(onlyRunecrafts);
+
+      var numberOfMaxSkills = 1;
+      var expectedSkills = new List<string>() { "Runecrafting" };
+      Assert.AreEqual(numberOfMaxSkills, runecrafter.GetMaxSkills().Count);
+      CollectionAssert.AreEqual(expectedSkills, runecrafter.GetMaxSkills());
+    }
+
+    private IEnumerable<(SkillName skill, string[] newData)> buildListOfSkillsToReplace(List<SkillName> skillsToReplace, string[] newData) => skillsToReplace.Select(x => (x, newData));
+
+
+    private Player constructPlayerWithReplacedSkills(IEnumerable<(SkillName skill, string[] newData)> replacementInfo) {
+      var newSkills = defaultSkills.ToList();
+      replacementInfo.ToList().ForEach(skillToReplace => {
+        newSkills.Insert((int)skillToReplace.skill, skillToReplace.newData);
+        newSkills.RemoveAt((int)skillToReplace.skill + 1);
+      });
+
+      return new Player(newSkills, defaultMinigames);
     }
 
   }
