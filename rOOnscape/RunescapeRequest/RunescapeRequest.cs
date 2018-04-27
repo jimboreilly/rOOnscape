@@ -31,10 +31,9 @@ namespace rOOnscape {
       var responseFromServer = GetHttpRequestResponse(baseurl + playerName);
 
       var transcribedResponse = responseFromServer.Split('\n').Select(row => row.Split(','));
-      var overallOffset = 1;
 
-      var justSkills = transcribedResponse.Take(Player.TotalSkills + overallOffset).Skip(overallOffset);
-      var justMinigames = transcribedResponse.Skip(overallOffset + Player.TotalSkills);
+      var justSkills = transcribedResponse.Take(Player.TotalSkills);
+      var justMinigames = transcribedResponse.Skip(Player.TotalSkills);
 
       return new Player(justSkills, justMinigames);
     }
