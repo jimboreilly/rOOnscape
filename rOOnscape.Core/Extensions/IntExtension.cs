@@ -5,6 +5,6 @@ using System.Text;
 
 namespace rOOnscape.Core.Extensions {
   public static class IntExtension {
-    public static IEnumerable<int> To(this int min, int max) => Enumerable.Range(min, max);
+    public static IEnumerable<int> To(this int min, int max) => Enumerable.Range(min, (max - min + 1));
   }
 }

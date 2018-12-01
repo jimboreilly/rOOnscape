@@ -10,8 +10,8 @@ namespace rOOnscape.Structures {
       this.score = Score;
     }
 
-    public int GetRank => this.rank;
-    public int GetScore => this.score;
+    public int Rank => this.rank;
+    public int Score => this.score;
   }
 
 }

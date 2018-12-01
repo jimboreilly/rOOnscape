@@ -12,9 +12,9 @@ namespace rOOnscape.Structures {
       this.exp = Experience;
     }
 
-    public int GetRank => this.rank;
-    public int GetLevel => this.level;
-    public int GetExperience => this.exp;
+    public int Rank => this.rank;
+    public int Level => this.level;
+    public int Experience => this.exp;
 
     public bool IsMax => this.level == 99;
 

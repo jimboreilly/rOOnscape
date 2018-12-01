@@ -7,3 +7,4 @@ Release/
 # VS Artifacts
 .vs/
 .vscode/
+TestResults/

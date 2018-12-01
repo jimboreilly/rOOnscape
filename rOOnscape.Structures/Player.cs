@@ -8,19 +8,17 @@ namespace rOOnscape.Structures {
 
   public class Player {
 
-    private Dictionary<SkillName, Skill> skills = new Dictionary<SkillName, Skill>();
-    private Dictionary<MinigameName, Minigame> minigames = new Dictionary<MinigameName, Minigame>();
+    private readonly Dictionary<SkillName, Skill> skills = new Dictionary<SkillName, Skill>();
+    private readonly Dictionary<MinigameName, Minigame> minigames = new Dictionary<MinigameName, Minigame>();
 
     public Player(IEnumerable<string[]> skillData, IEnumerable<string[]> miniGameData) {
-      foreach (var skillCount in 0.To(TotalSkills)) {
-        var skillName = getEnumTypeFromIndex<SkillName>(skillCount);
-        skills.Add(skillName, buildFromStringArray<Skill>(buildSkill, skillData.ElementAt(skillCount)));
-      }
+      this.skills = 0.To(TotalSkills - 1)
+        .ToDictionary(index => getEnumTypeFromIndex<SkillName>(index),
+                      index => buildFromStringArray<Skill>(buildSkill, skillData.ElementAt(index)));
 
-      foreach (var minigameCount in 0.To(TotalMinigames)) {
-        var minigameName = getEnumTypeFromIndex<MinigameName>(minigameCount);
-        minigames.Add(minigameName, buildFromStringArray<Minigame>(buildMinigame, miniGameData.ElementAt(minigameCount)));
-      }
+      this.minigames = 0.To(TotalMinigames - 1)
+        .ToDictionary(index => getEnumTypeFromIndex<MinigameName>(index),
+                      index => buildFromStringArray<Minigame>(buildMinigame, miniGameData.ElementAt(index)));
     }
 
     private T getEnumTypeFromIndex<T>(int index) {
@@ -50,10 +48,10 @@ namespace rOOnscape.Structures {
     public static readonly int TotalSkills = Enum.GetNames(typeof(SkillName)).Length;
     public static readonly int TotalMinigames = Enum.GetNames(typeof(MinigameName)).Length;
 
-    public int GetGlobalRankOfSkill(SkillName s) => skills[s].GetRank;
-    public int GetLevelOfSkill(SkillName s) => skills[s].GetLevel;
-    public int GetExperienceOfSkill(SkillName s) => skills[s].GetExperience;
-    public int GetTotalLevel() => skills.Sum(x => x.Value.GetLevel);
+    public int GetGlobalRankOfSkill(SkillName s) => skills[s].Rank;
+    public int GetLevelOfSkill(SkillName s) => skills[s].Level;
+    public int GetExperienceOfSkill(SkillName s) => skills[s].Experience;
+    public int TotalLevel() => skills.Sum(x => x.Value.Level);
 
     public bool IsMaxSkill(SkillName s) => skills[s].IsMax;
     public List<string> GetMaxSkills() => skills.Where(skill => skill.Value.IsMax).Select(x => Enum.GetName(typeof(SkillName), (int)x.Key)).ToList();

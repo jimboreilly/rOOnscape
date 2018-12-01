@@ -6,7 +6,7 @@ using rOOnscape.Structures;
 using rOOnscape.Structures.Types;
 using rOOnscape.Core.Extensions;
 
-namespace rOOnscape.Specs {
+namespace rOOnscape.Structures.Specs {
 
   public class Tests {
     private IEnumerable<string[]> defaultSkills;
@@ -44,16 +44,16 @@ namespace rOOnscape.Specs {
     [Test]
     public void TotalLevelOfNewPlayerIsEqualToTotalSkills() {
       var noob = new Player(defaultSkills, defaultMinigames);
-      Assert.AreEqual(Player.TotalSkills, noob.GetTotalLevel());
+      Assert.AreEqual(Player.TotalSkills, noob.TotalLevel());
     }
 
     [Test]
     public void APlayerAfterTheFirstStepOfTutorialIslandHasPlus1TotalLevel() {
       var level2Skill = new[] { "1", "2", "83" };
-      var newSkills = new List<(SkillName skill, string[] newData)> { (SkillName.Cooking, level2Skill) };
-      var cookedSomeShrimpOnTutorialIsland = constructPlayerWithReplacedSkills(newSkills);
+      var level2Cooking = new List<(SkillName skill, string[] newData)> { (SkillName.Cooking, level2Skill) };
+      var cookedSomeShrimpOnTutorialIsland = constructPlayerWithReplacedSkills(level2Cooking);
 
-      Assert.AreEqual(Player.TotalSkills + 1, cookedSomeShrimpOnTutorialIsland.GetTotalLevel());
+      Assert.AreEqual(Player.TotalSkills + 1, cookedSomeShrimpOnTutorialIsland.TotalLevel());
     }
 
     [Test]
@@ -81,7 +81,6 @@ namespace rOOnscape.Specs {
     }
 
     private IEnumerable<(SkillName skill, string[] newData)> buildListOfSkillsToReplace(List<SkillName> skillsToReplace, string[] newData) => skillsToReplace.Select(x => (x, newData));
-
 
     private Player constructPlayerWithReplacedSkills(IEnumerable<(SkillName skill, string[] newData)> replacementInfo) {
       var newSkills = defaultSkills.ToList();
