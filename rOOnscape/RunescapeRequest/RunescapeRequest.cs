@@ -5,24 +5,30 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using rOOnscape.Structures;
+using rOOnscape.Core.Http;
 
 namespace rOOnscape {
   public class RuneScapeRequest {
 
     public RuneScapeRequest() { }
+
+    private string parseWebResponseToString(WebResponse response) {
+      var streamReader = new StreamReader(response.GetResponseStream());
+      var responseString = streamReader.ReadToEnd();
+      streamReader.Close();
+
+      return responseString;
+    }
+
     public string GetHttpRequestResponse(string url) {
 
-      var request = WebRequest.Create(url);
+      var request = new WebRequestDecorator(url);
       var httpResponse = request.GetResponse();
-      var dataStream = httpResponse.GetResponseStream();
-      var reader = new StreamReader(dataStream);
+      var responseString = parseWebResponseToString(httpResponse);
 
-      var response = reader.ReadToEnd();
-
-      reader.Close();
       httpResponse.Close();
 
-      return response;
+      return responseString;
 
     }
 
