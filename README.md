@@ -15,6 +15,3 @@ Objects to hold data returned from RuneScape API and provide meaningful encapsul
 
 Core program code unrelated to the project directly but used to abstract functions in the other projects, such as C# extensions of existing types
 
-### rOOnscape.Tests
-
-NUnit test fixtures documenting project specifications and use cases
